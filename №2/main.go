@@ -13,14 +13,17 @@ func main() {
 	in = bufio.NewReader(os.Stdin)
 	out = bufio.NewWriter(os.Stdout)
 	defer out.Flush()
+
 	var str string
 	_, _ = fmt.Fscan(in, &str)
 	n := new(big.Int)
 	n.SetString(str, 10)
 	var result int
-	for n.Cmp(big.NewInt(1)) == 1 {
+
+	number := big.NewInt(1)
+	for number.Cmp(n) < 0 {
 		result++
-		n.Div(n, big.NewInt(2))
+		number.Mul(number, big.NewInt(2))
 	}
 	fmt.Fprint(out, result)
 }
